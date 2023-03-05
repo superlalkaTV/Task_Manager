@@ -55,8 +55,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void delete(User user) throws SQLException{
-        jdbcTemplate.update(DELETE_USER_BY_ID, user.getId());
+    public void delete(long id) throws SQLException{
+        jdbcTemplate.update(DELETE_USER_BY_ID, id);
     }
 
     private static class UserRowMapper implements RowMapper<User> {
