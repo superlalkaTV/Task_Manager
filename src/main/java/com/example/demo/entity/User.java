@@ -1,7 +1,5 @@
 package com.example.demo.entity;
 
-import com.example.demo.dto.userdto.CreateUserDto;
-import com.example.demo.dto.userdto.UpdateUserDto;
 import com.example.demo.util.validator.ValidPassword;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -23,19 +21,6 @@ public class User {
         this.email = email;
         this.password = password;
     }
-
-    public User(CreateUserDto userDto) {
-        username = userDto.getUsername();
-        email = userDto.getEmail();
-        password = userDto.getPassword();
-    }
-
-    public User(UpdateUserDto userDto) {
-        username = userDto.getUsername();
-        email = userDto.getEmail();
-        password = userDto.getPassword();
-    }
-
     public String getUsername() {
         return username;
     }
