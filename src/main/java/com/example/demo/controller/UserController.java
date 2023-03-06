@@ -1,7 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.userdto.CreateUserDto;
-import com.example.demo.dto.userdto.UserDto;
 import com.example.demo.entity.User;
 import com.example.demo.service.impl.UserServiceImpl;
 import jakarta.validation.Valid;
