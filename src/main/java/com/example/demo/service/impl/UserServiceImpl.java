@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUserById(Long id) throws SQLException {
-        userDao.delete(id);
+    public boolean deleteUserById(Long id) throws SQLException {
+        return userDao.delete(id)==1;
     }
 }

@@ -5,11 +5,16 @@ import com.example.demo.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -45,7 +50,16 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User save(User user) throws SQLException{
-        jdbcTemplate.update(SAVE_USER, user.getUsername(), user.getPassword(), user.getEmail());
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(connection ->{
+            PreparedStatement ps = connection.prepareStatement(SAVE_USER, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
+            return ps;
+        }, keyHolder);
+        long userId =Objects.requireNonNull(keyHolder.getKey()).longValue();
+        user.setId(userId);
         return user;
     }
 
@@ -55,8 +69,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void delete(long id) throws SQLException{
-        jdbcTemplate.update(DELETE_USER_BY_ID, id);
+    public int delete(long id) throws SQLException{
+        return jdbcTemplate.update(DELETE_USER_BY_ID, id);
     }
 
     private static class UserRowMapper implements RowMapper<User> {

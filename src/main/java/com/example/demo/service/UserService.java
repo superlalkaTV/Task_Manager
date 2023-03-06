@@ -10,5 +10,5 @@ public interface UserService {
     User updateUser(User user) throws SQLException;
     User getUserById(Long id);
     List<User> getAllUsers() throws SQLException;
-    void deleteUserById(Long id) throws SQLException;
+    boolean deleteUserById(Long id) throws SQLException;
 }
