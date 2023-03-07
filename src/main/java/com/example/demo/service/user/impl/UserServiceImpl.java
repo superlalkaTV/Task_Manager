@@ -1,9 +1,9 @@
-package com.example.demo.service.impl;
+package com.example.demo.service.user.impl;
 
 import com.example.demo.dao.UserDao;
 import com.example.demo.entity.User;
 import com.example.demo.exception.UserException;
-import com.example.demo.service.UserService;
+import com.example.demo.service.user.UserService;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;

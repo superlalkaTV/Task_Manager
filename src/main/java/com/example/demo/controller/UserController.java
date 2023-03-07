@@ -1,7 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.User;
-import com.example.demo.service.impl.UserServiceImpl;
+import com.example.demo.service.mail.EmailService;
+import com.example.demo.service.user.impl.UserServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -76,6 +77,16 @@ public class UserController {
             throw new RuntimeException(e);
         }
         return ResponseEntity.ok(users);
+    }
+
+    @Autowired
+    EmailService emailService;
+    @GetMapping("/mail")
+    public void sendEmailTest(){
+        String to = "maksim.bataev.2016@gmail.com";
+        String subject = "test";
+        String text = "testtesttesttesttest";
+        emailService.sendMail(to,subject,text);
     }
 
 }
