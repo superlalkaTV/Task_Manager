@@ -80,6 +80,7 @@ public class UserDaoImpl implements UserDao {
             String username = resultSet.getString("username");
             String password = resultSet.getString("password");
             String email = resultSet.getString("email");
+
             return new User(id, username, password, email);
         }
     }

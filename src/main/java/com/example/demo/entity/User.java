@@ -16,6 +16,7 @@ public class User {
     private String email;
     @ValidPassword(message = "Password should be valid")
     private String password;
+    private String emailToken;
 
     public User(Long id, String username, String email, String password) {
         this.id = id;
